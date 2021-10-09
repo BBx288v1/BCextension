@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Auto Trendball by Ha Luu</title>
+    <link href="https://fonts.googleapis.com/css2?family=Gemunu+Libre:wght@500&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="popup.css">
+    <script src="popup.js"></script>
+</head>
+
+<body>
+    <div class="modal-header">
+        <h1 class="logo">
+            <div class="name-tool">
+                <img class="logo-icon" src="icon.png" />
+                Auto Trendball by Ha Luu
+            </div>
+            <span class="version">(1.0.0)</span>
+        </h1>
+    </div>
+
+    <form name="setting">
+        <div class="form-group">
+            <div class="form-row">
+                <div class="form-group input-group-prepend col-8 ">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">Bet</div>
+                        </div>
+                        <input type="text" class="form-control" id="bet" name="bet" value="1">
+                    </div>
+                </div>
+                <div class="form-group input-group-prepend pl-2 col-4">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">X</div>
+                        </div>
+                        <input type="text" class="form-control" id="multiply" name="multiply" onkeyup="calculate()" value="2">
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <textarea class="form-control" id="list_bet" name="list_bet" rows="5" id="guess">2.00000000, 4.00000000, 8.00000000, 16.00000000, 32.00000000, 64.00000000, 128.00000000, 256.00000000, 512.00000000, 1024.00000000, 2048.00000000, 4096.00000000, 8192.00000000, 16384.00000000, 32768.00000000, 65536.00000000, 131072.00000000, 262144.00000000, 524288.00000000, 1048576.00000000
+                </textarea>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text">
+                            <input type="checkbox">
+                        </label>
+                    </div>
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">Stop</div>
+                    </div>
+                    <input type="text" class="form-control" id="pause" value="1">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">when loss</div>
+                    </div>
+                    <input type="text" class="form-control" id="pause_on" value="4">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">time</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-row pl-0 col-10">
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">Stop when loss streak</div>
+                    </div>
+                    <input type="text" class="form-control" id="stop_ls" value="10">
+                </div>
+            </div>
+        </div>
+
+        <div class="form-row pl-0 col-10">
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">Return main bet when loss streak</div>
+                    </div>
+                    <input type="text" class="form-control" id="stop_loss" value="10">
+                </div>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">Take profit</div>
+                    </div>
+                    <input type="text" class="form-control" id="take_profit" value="100">
+                </div>
+            </div>
+            <div class="form-group pl-2 col">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">Stop loss</div>
+                    </div>
+                    <input type="text" class="form-control" id="stop_loss" value="100">
+                </div>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text cwtt">Separation of prediction and money</div>
+                    </div>
+                    <div class="input-group-prepend">
+                        <label class="input-group-text cwrd">
+                            <input type="radio" name="inlineRadioOptions" id="inlineRadio1 " checked="checked"
+                                value="option1">
+                            <label class="form-check-label" for="inlineRadio1" value="">Yes</label>
+                        </label>
+                    </div>
+                    <div class="input-group-prepend">
+                        <label class="input-group-text cwrd">
+                            <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                            <label class="form-check-label" for="inlineRadio2">No</label>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="guess">Enter your prediction</label>
+            <textarea class="form-control" rows="5" id="guess"></textarea>
+        </div>
+        <div class="form-group ">
+            <button type="button" class="btn btn-success">Start</button>
+            <button type="button" class="btn btn-danger">Stop</button>
+        </div>
+        <div class="form-group">
+            <label for="guess">Notifications</label>
+            <textarea disabled class="form-control" rows="5" id="guess"></textarea>
+        </div>
+    </form>
+    <div class="modal-icons">
+
+    </div>
+
+</body>
+
+</html>
